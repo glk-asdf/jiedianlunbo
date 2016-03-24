@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="./js/animate.js"></script>
+	<script type="text/javascript">
+	window.onload=function(){
+		function getclass(classname,fanwei){
+			fanwei=fanwei?fanwei:document;
+			if (document.getElementsByClassName) {
+				return fanwei.getElementsByClassName(classname);
+
+			}else{
+				var all=fanwei.getElementsByTagName("*");
+				var newarr=[];
+				for (var i = 0; i < all.length; i++) {
+					if (all[i].className===classname) {
+						newarr.push(all[i]);
+					};
+					
+				}return newarr;
+			}
+		}
+			// 在某个范围内分类截取元素false，或元素和文本true
+	function fljq(fw,tf){
+		tf=tf?tf:false;
+		fw=fw?fw:document.getElementsByTagName("body")[0];
+		var newchilds=fw.childNodes;
+		var newarr=[];
+		for (var i = 0; i < newchilds.length; i++) {
+			if (newchilds[i].nodeType==1) {
+			newarr[newarr.length]=newchilds[i];	
+			}else if(tf&&panduan(newchilds[i].nodeValue)&&newchilds[i].nodeType==3){
+				newarr[newarr.length]=newchilds[i];
+			}
+			
+		};
+		return newarr;
+	}
+	// 判断是否为空
+	function panduan(str){
+		// var a=str.length;
+		for (var i = 0; i < str.length; i++) {
+			if (!(/^\s+$/.test(str))) {
+			return true;
+		}
+		};
+		return false;
+	}
+
+
+	// 获得第一个节点
+	function getfirstn(fwe){
+		return fljq(fwe,false)[0];
+	}
+	// 获得最后一个节点
+	function getlastn(fwe){
+		var a=fljq(fwe,false).length-1;
+		return fljq(fwe,false)[a];
+	}
+		var zong=getclass("zong")[0];
+		var wai=getclass("wai")[0];
+		var as=zong.getElementsByTagName("div");
+		
+		var zuoq=getclass("zuoq")[0];
+		var youq=getclass("youq")[0];
+		var farg=true;
+		var first=getfirstn(zong);
+		var last=getlastn(zong);
+		
+		function mover(){
+			var first=getfirstn(zong);
+			var last=getlastn(zong);
+			if (!farg) {return};
+			farg=false;
+			animate(zong,{left:-300},function(){
+				zong.appendChild(first);
+				zong.style.left=0;
+				farg=true;
+			})
+			// if (!farg) {return};
+			// farg=false;
+			// num++;
+			// if (num===5) {num=0};
+			// for (var i = 0; i < as.length; i++) {
+			// 	as[i].style["left"]="500px";
+			// };
+			// as[index].style["left"]=0;
+			// animate(as[index],{left:-500},function(){
+			// 	farg=true;
+			// })
+			// animate(as[num],{left:0})
+			// index=num;
+			// as[num].style["left"]=1;
+		}
+		function movel(){
+			var first=getfirstn(zong);
+			var last=getlastn(zong);
+			if (!farg) {return};
+			farg=false;
+			zong.style.left="-300px";
+			zong.insertBefore(last,first)
+			animate(zong,{left:0},function(){
+				farg=true;
+			})
+			// if (!farg) {return};
+			// farg=false;
+			// num--;
+			// if (num<0) {num=4};
+			// for (var i = 0; i < as.length; i++) {
+			// 	as[i].style["left"]="-500px";
+			// };
+			// as[index].style["left"]=0;
+			// animate(as[index],{left:500},function(){
+			// 	farg=true;
+			// })
+			// animate(as[num],{left:0})
+			// index=num;
+			// as[num].style["left"]=1;
+		}
+
+		var t=setInterval(mover,1000);
+		wai.onmouseover=function(){
+			clearInterval(t);
+		}
+		wai.onmouseout=function(){
+			t=setInterval(mover,1000);
+		}
+		youq.onclick=function(){
+			mover();
+		}
+		zuoq.onclick=function(){
+			movel();
+		}
+		
+
+
+
+	}
+	</script>
+	<style type="text/css">
+	.wai{
+		width: 900px;
+		height: 300px;
+		display: block;
+		border: 2px solid #333;		
+		position: absolute;
+		top: 50%;
+		margin-top: -150px;
+		left: 50%;
+		margin-left:-450px;
+		line-height: 300px;
+		text-align: center;
+		overflow: hidden;
+	}
+	.zong{
+		width: 1500px;
+		height: 300px;
+		position: absolute;
+	}
+	.a1{
+		width: 300px;
+		height: 300px;
+		background: #666;
+		float: left;
+		opacity: 1;
+
+	}
+	.a2{
+		width: 300px;
+		height: 300px;
+		background: #777;
+		float: left;
+		opacity: 1;
+		
+	}
+	.a3{
+		width: 300px;
+		height: 300px;
+		background: #888;
+		float: left;
+		opacity: 1;
+		
+	}
+	.a4{
+		width: 300px;
+		height: 300px;
+		background: #999;
+		float: left;
+		opacity: 1;
+		
+	}
+	.a5{
+		width: 300px;
+		height: 300px;
+		background: #aaa;
+		float: left;
+		opacity: 1;
+		
+	}
+	span{
+		display: block;
+		float: left;
+		width: 20px;
+		height: 20px;
+		margin-right: 10px;
+		border-radius: 10px;
+		background: #333;
+	}
+	.dianz{
+		width: 150px;
+		height: 20px;
+		position: absolute;
+		top: 200px;
+		left: 50%;
+		margin-left: -75px;
+        background: #fff;
+        opacity: 0;
+	}
+	.zuoq{
+		width: 30px;
+		height: 50px;
+		line-height: 50px;
+		font-size: 16px;
+		text-align: center;
+		position: absolute;
+		left: 0;
+		top: 50%;
+		margin-top: -25px;
+        background: #fff;
+	}
+	.youq{
+		width: 30px;
+		height: 50px;
+		line-height: 50px;
+		font-size: 16px;
+		text-align: center;
+		position: absolute;
+		right: 0;
+		top: 50%;
+		margin-top: -25px;
+        background: #fff;
+	}
+
+	</style>
+</head>
+<body>
+
+	<div class="wai">
+	<div class="zong">
+		<div class="a1">1111</div>
+		<div class="a2">2222</div>
+		<div class="a3">3333</div>
+		<div class="a4">4444</div>
+		<div class="a5">5555</div>
+		
+		
+	</div>
+		<span class="zuoq"><</span>
+		<span class="youq">></span>
+	</div>
+</body>
+</html>
